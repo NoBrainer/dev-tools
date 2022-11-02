@@ -3,7 +3,6 @@
 # Based on: https://prettier.io/docs/en/precommit.html#option-6-shell-script
 
 # Format all staged files with prettier
-# TODO: If possible, make the other scripts only affect the staged files like this.
 function formatWithPrettier {
   echo "$STAGED_FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --write
   if [[ $? -ne 0 ]]; then
@@ -95,8 +94,6 @@ formatWithMaven
 #formatWithPrettier
 
 # Add back the formatted files to staging
-# Note: If non-staged files were formatted, they won't be part of the commit. This won't prevent the commit, but the
-#       files will still be modified after the commit.
 echo "$STAGED_FILES" | xargs git add
 
 # Revert files that were only changed from formatting
